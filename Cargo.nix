@@ -277,14 +277,14 @@ rec {
       };
       "ethos-zero" = rec {
         crateName = "ethos-zero";
-        version = "27.0.0";
+        version = "28.0.0";
         edition = "2024";
         crateBin = [];
         workspace_member = null;
         src = pkgs.fetchgit {
           url = "https://github.com/LiGoldragon/ethos-zero";
-          rev = "8c95310c4c372cfe115cdebc3e85021b98cf2974";
-          sha256 = "1nqshn23ibbnnadi10wj79dn6wcjjkgfav6qkwsa7jg6r9m87v76";
+          rev = "970459d100ddee5f62a76c05642ecfabefba6329";
+          sha256 = "1iymm3vjsxslkfp1gih72shiav8gk0bkrra1ix3ka9iyg578ldcf";
         };
         libName = "ethos_zero";
         dependencies = [

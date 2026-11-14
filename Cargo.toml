@@ -23,7 +23,7 @@ rkyv = { version = "0.8", default-features = false, features = ["std", "bytechec
 # generation. The rev string is the one Flow writes, so one ethos-zero source
 # stands in every graph that holds both.
 [build-dependencies]
-ethos-zero = { git = "https://github.com/LiGoldragon/ethos-zero", rev = "8c95310" }
+ethos-zero = { git = "https://github.com/LiGoldragon/ethos-zero", rev = "970459d" }
 
 [lints.rust]
 unsafe_code = "forbid"
