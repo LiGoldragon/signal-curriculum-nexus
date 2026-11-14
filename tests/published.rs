@@ -84,9 +84,9 @@ fn the_published_inputs_read_and_archive_back() {
 
 #[test]
 fn the_published_outputs_read_and_archive_back() {
-    assert_eq!(output(RESOLVED_SKILLS), Output::ResolvedSkills(core()));
-    let Output::ResolvedSources(modules) = output(RESOLVED_SOURCES) else {
-        panic!("ResolvedSources");
+    assert_eq!(output(RESOLVED_SKILLS), Output::SkillsResolved(core()));
+    let Output::SourcesResolved(modules) = output(RESOLVED_SOURCES) else {
+        panic!("SourcesResolved");
     };
     assert_eq!(
         modules

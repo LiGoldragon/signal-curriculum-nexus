@@ -19,8 +19,8 @@ Signal
   ResolveSources.Vector<ModuleIdentity>
   ComposeStartup.StartupSelection
   ComposeRole.RoleSelection ]
-[ ResolvedSkills.Vector<ModuleIdentity>
-  ResolvedSources.Vector<ResolvedModule>
+[ SkillsResolved.Vector<ModuleIdentity>
+  SourcesResolved.Vector<ResolvedModule>
   StartupComposed.StartupComposition
   RoleComposed.RoleComposition
   Rejected.String ]

@@ -42,11 +42,11 @@ fn each_input_is_answered_by_its_own_capability() {
     let identities = vec![ModuleIdentity("spirit:core:0".into())];
     assert_eq!(
         Input::ResolveSkills(identities.clone()).answer(&Echo),
-        Output::ResolvedSkills(identities.clone())
+        Output::SkillsResolved(identities.clone())
     );
     assert_eq!(
         Input::ResolveSources(identities).answer(&Echo),
-        Output::ResolvedSources(Vec::new())
+        Output::SourcesResolved(Vec::new())
     );
 }
 

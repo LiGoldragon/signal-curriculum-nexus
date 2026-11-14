@@ -60,8 +60,8 @@ fn inputs() -> Vec<Input> {
 
 fn outputs() -> Vec<Output> {
     vec![
-        Output::ResolvedSkills(vec![identity("spirit:core:0")]),
-        Output::ResolvedSources(vec![ResolvedModule {
+        Output::SkillsResolved(vec![identity("spirit:core:0")]),
+        Output::SourcesResolved(vec![ResolvedModule {
             module_identity: identity("spirit:core:0"),
             repository_name: RepositoryName("psyche-belief".into()),
             source_revision: SourceRevision("0".repeat(40)),

@@ -37,10 +37,10 @@ fn an_input_is_read_from_its_text() {
 #[test]
 fn an_output_is_written_as_its_text() {
     assert_eq!(
-        Output::ResolvedSkills(vec![ModuleIdentity("spirit:core:0".into())])
+        Output::SkillsResolved(vec![ModuleIdentity("spirit:core:0".into())])
             .datomize(vec![])
             .protosize()
             .textualize(),
-        "ResolvedSkills.[ spirit:core:0 ]"
+        "SkillsResolved.[ spirit:core:0 ]"
     );
 }

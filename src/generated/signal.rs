@@ -260,8 +260,8 @@ pub enum Input {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Output {
-    ResolvedSkills(std::vec::Vec<ModuleIdentity>),
-    ResolvedSources(std::vec::Vec<ResolvedModule>),
+    SkillsResolved(std::vec::Vec<ModuleIdentity>),
+    SourcesResolved(std::vec::Vec<ResolvedModule>),
     StartupComposed(StartupComposition),
     RoleComposed(RoleComposition),
     Rejected(String),
@@ -297,12 +297,12 @@ impl Answerable for Input {
             Input::ResolveSkills(carried) => {
                 nexus
                     .resolve_skills(carried)
-                    .map_or_else(|refusal| refusal, Output::ResolvedSkills)
+                    .map_or_else(|refusal| refusal, Output::SkillsResolved)
             }
             Input::ResolveSources(carried) => {
                 nexus
                     .resolve_sources(carried)
-                    .map_or_else(|refusal| refusal, Output::ResolvedSources)
+                    .map_or_else(|refusal| refusal, Output::SourcesResolved)
             }
             Input::ComposeStartup(carried) => {
                 nexus
