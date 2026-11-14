@@ -1,0 +1,66 @@
+; The Curriculum Nexus's wire, as Flow, the curriculum CLI and
+; curriculum-deploy speak it: one big-endian u32 length-prefixed rkyv Input
+; frame on a connection to Curriculum's socket, one Output frame back.
+;
+; An input names modules by identity alone, kind:subject:version; Curriculum
+; reads their text from the three belief repositories it is configured with.
+; The n-th output answers the n-th input. Rejected, past the last input, is
+; the refusal any input may be answered with, carrying Curriculum's reason.
+;
+; ResolveSkills answers the identities of the modules named and of every
+; module they depend on, each after its dependencies; ResolveSources answers
+; the same modules with their source and text. ComposeStartup composes a
+; flow's system and user text from the module identities it names, and the
+; raw records of the flows it remembers. ComposeRole composes a declared
+; role's description and context for its surface.
+Signal
+[]
+[ ResolveSkills.Vector<ModuleIdentity>
+  ResolveSources.Vector<ModuleIdentity>
+  ComposeStartup.StartupSelection
+  ComposeRole.RoleSelection ]
+[ ResolvedSkills.Vector<ModuleIdentity>
+  ResolvedSources.Vector<ResolvedModule>
+  StartupComposed.StartupComposition
+  RoleComposed.RoleComposition
+  Rejected.String ]
+[ ModuleIdentity.String
+  RepositoryName.String
+  SourceRevision.String
+  SourceRoot.String
+  SourceRelativePath.String
+  ModuleType.String
+  ModuleSubject.String
+  DeclaredPlacement.String
+  SourceSha256.String
+  BodySha256.String
+  RenderedSha256.String
+  Target.[ Claude Codex Pi OpenCode ]
+  CallerMetaflow.{ String String String }
+  StartupPlacement.[ System User ]
+  SystemModules.Vector<ModuleIdentity>
+  UserModules.Vector<ModuleIdentity>
+  FlowId.String
+  SystemText.String
+  UserText.String
+  RecordsText.String
+  SystemPayloadSha256.String
+  UserPayloadSha256.String
+  RecordsPayloadSha256.String
+  StartupSelection.{ CallerMetaflow Target SystemModules UserModules Vector<FlowId> }
+  ContextProvenance.{ ModuleIdentity RepositoryName SourceRevision SourceRelativePath SourceSha256 BodySha256 RenderedSha256 StartupPlacement Integer }
+  StartupComposition.{ SystemText UserText RecordsText SystemPayloadSha256 UserPayloadSha256 RecordsPayloadSha256 Vector<ContextProvenance> }
+  ResolvedModule.{ ModuleIdentity RepositoryName SourceRevision SourceRoot SourceRelativePath ModuleType ModuleSubject DeclaredPlacement SourceSha256 BodySha256 String Vector<String> }
+  RoleName.String
+  ModelId.String
+  DescriptionText.String
+  ContextText.String
+  DescriptionPayloadSha256.String
+  ContextPayloadSha256.String
+  Permission.[ Restricted Unrestricted ]
+  Effort.[ Low Medium High Xhigh ]
+  Surface.[ ClaudeAgent CodexAgent PiAgent ]
+  RoleTools.[ Inherit Explicit.Vector<String> ]
+  RoleCallers.[ Any Only.Vector<CallerMetaflow> ]
+  RoleSelection.{ RoleName Surface }
+  RoleComposition.{ RoleName Surface ModelId Effort Permission DescriptionText ContextText RoleTools RoleCallers Vector<ContextProvenance> DescriptionPayloadSha256 ContextPayloadSha256 } ]
