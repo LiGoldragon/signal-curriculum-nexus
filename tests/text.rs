@@ -131,6 +131,6 @@ fn listing_records_preserve_singleton_and_span_identity_and_file() {
             .datomize(vec![])
             .protosize()
             .textualize(),
-        "ModulesVerbose.[ { { { Vision\n                   topic\n                   Span.{ 0 1 } }\n                 /belief/vision/topic/0-1.md }\n               «A span.» } ]"
+        "ModulesVerbose.[ { { { Vision\n                       topic\n                       Span.{ 0 1 } }\n                     /belief/vision/topic/0-1.md }\n                   «A span.» } ]"
     );
 }
