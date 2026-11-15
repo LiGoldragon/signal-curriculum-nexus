@@ -43,6 +43,19 @@ fn an_input_is_read_from_its_text() {
             .expect("an input"),
         Input::ResolveSkills(vec![identity()])
     );
+    assert_eq!(
+        Potential::<Input>::from("ResolveSources.[ { Vision topic Span.{ 0 1 } } ]")
+            .actualize(&mut budget())
+            .expect("a span input"),
+        Input::ResolveSources(vec![ModuleIdentity {
+            module_kind: ModuleKind::Vision,
+            module_subject: ModuleSubject("topic".into()),
+            versions: Versions::Span(signal_curriculum_nexus::Span_Data {
+                first: signal_curriculum_nexus::First(Version(0)),
+                last: signal_curriculum_nexus::Last(Version(1)),
+            }),
+        }])
+    );
 }
 
 #[test]

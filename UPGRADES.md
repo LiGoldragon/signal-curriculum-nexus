@@ -18,4 +18,4 @@ projection, stay in Curriculum and import these types.
 
 Module identities now cross the wire as `{ Spirit subject Single.0 }` or
 `{ Spirit subject Span.{ 0 1 } }`, with typed registry kinds and versions.
-The 0.1.0 archive frames are historical and are refused by the 0.2.0 reader.
+The 0.1.0 archive frames are historical. The 0.2.0 reader and writer use matched contract versions; rkyv enum layout provides no reliable guarantee that a reader rejects every frame from an older contract.

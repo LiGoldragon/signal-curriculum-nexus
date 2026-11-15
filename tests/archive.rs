@@ -14,14 +14,30 @@ use signal_curriculum_nexus::{
 
 fn identity(text: &str) -> ModuleIdentity {
     let mut parts = text.split(':');
+    let module_kind = match parts.next().unwrap() {
+        "spirit" => ModuleKind::Spirit,
+        "intent" => ModuleKind::Intent,
+        "vision" => ModuleKind::Vision,
+        "knowledge" => ModuleKind::Knowledge,
+        "inquiry" => ModuleKind::Inquiry,
+        "compensation" => ModuleKind::Compensation,
+        "role" => ModuleKind::Role,
+        "raw" => ModuleKind::Raw,
+        _ => panic!(),
+    };
+    let module_subject = ModuleSubject(parts.next().unwrap().into());
+    let version = parts.next().unwrap();
+    let versions = match version.split_once('-') {
+        Some((first, last)) => Versions::Span(signal_curriculum_nexus::Span_Data {
+            first: signal_curriculum_nexus::First(Version(first.parse().unwrap())),
+            last: signal_curriculum_nexus::Last(Version(last.parse().unwrap())),
+        }),
+        None => Versions::Single(Version(version.parse().unwrap())),
+    };
     ModuleIdentity {
-        module_kind: match parts.next().unwrap() {
-            "spirit" => ModuleKind::Spirit,
-            "intent" => ModuleKind::Intent,
-            _ => panic!(),
-        },
-        module_subject: ModuleSubject(parts.next().unwrap().into()),
-        versions: Versions::Single(Version(parts.next().unwrap().parse().unwrap())),
+        module_kind,
+        module_subject,
+        versions,
     }
 }
 
@@ -55,6 +71,7 @@ fn inputs() -> Vec<Input> {
         Input::ResolveSources(vec![
             identity("intent:design:0"),
             identity("vision:ethos:0"),
+            identity("vision:topic:0-1"),
         ]),
         Input::ComposeStartup(StartupSelection {
             caller_metaflow: caller(),
