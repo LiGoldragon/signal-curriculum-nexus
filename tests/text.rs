@@ -4,7 +4,18 @@
 
 use datom_codec::{Actualizing, Budget, Datomizable, Potential};
 use protos::{Protosizable, ReaderBudget, Textualizable};
-use signal_curriculum_nexus::{Input, ModuleIdentity, Output, RoleName, RoleSelection, Surface};
+use signal_curriculum_nexus::{
+    DescriptionText, Input, Module, ModuleDescription, ModuleFile, ModuleIdentity, ModuleKind,
+    ModuleSubject, Output, RoleName, RoleSelection, Surface, Version, Versions,
+};
+
+fn identity() -> ModuleIdentity {
+    ModuleIdentity {
+        module_kind: ModuleKind::Spirit,
+        module_subject: ModuleSubject("core".into()),
+        versions: Versions::Single(Version(0)),
+    }
+}
 
 fn budget() -> Budget {
     Budget {
@@ -27,20 +38,83 @@ fn an_input_is_read_from_its_text() {
         })
     );
     assert_eq!(
-        Potential::<Input>::from("ResolveSkills.[ spirit:core:0 ]")
+        Potential::<Input>::from("ResolveSkills.[ { Spirit core Single.0 } ]")
             .actualize(&mut budget())
             .expect("an input"),
-        Input::ResolveSkills(vec![ModuleIdentity("spirit:core:0".into())])
+        Input::ResolveSkills(vec![identity()])
     );
 }
 
 #[test]
 fn an_output_is_written_as_its_text() {
     assert_eq!(
-        Output::SkillsResolved(vec![ModuleIdentity("spirit:core:0".into())])
+        Output::SkillsResolved(vec![identity()])
             .datomize(vec![])
             .protosize()
             .textualize(),
-        "SkillsResolved.[ spirit:core:0 ]"
+        "SkillsResolved.[ { Spirit core Single.0 } ]"
+    );
+}
+
+#[test]
+fn listing_inputs_and_empty_outputs_are_typed() {
+    assert_eq!(
+        Potential::<Input>::from("Modules")
+            .actualize(&mut budget())
+            .unwrap(),
+        Input::Modules
+    );
+    assert_eq!(
+        Potential::<Input>::from("ModulesVerbose")
+            .actualize(&mut budget())
+            .unwrap(),
+        Input::ModulesVerbose
+    );
+    assert_eq!(
+        Output::Modules(Vec::new())
+            .datomize(vec![])
+            .protosize()
+            .textualize(),
+        "Modules.[]"
+    );
+    assert_eq!(
+        Output::ModulesVerbose(Vec::new())
+            .datomize(vec![])
+            .protosize()
+            .textualize(),
+        "ModulesVerbose.[]"
+    );
+}
+
+#[test]
+fn listing_records_preserve_singleton_and_span_identity_and_file() {
+    let singleton = Module {
+        module_identity: identity(),
+        module_file: ModuleFile("/belief/spirit/core/0.md".into()),
+    };
+    let span = ModuleDescription {
+        module: Module {
+            module_identity: ModuleIdentity {
+                module_kind: ModuleKind::Vision,
+                module_subject: ModuleSubject("topic".into()),
+                versions: Versions::Span(signal_curriculum_nexus::Span_Data {
+                    first: signal_curriculum_nexus::First(Version(0)),
+                    last: signal_curriculum_nexus::Last(Version(1)),
+                }),
+            },
+            module_file: ModuleFile("/belief/vision/topic/0-1.md".into()),
+        },
+        description_text: DescriptionText("A span.".into()),
+    };
+    assert_eq!(
+        Output::Modules(vec![singleton])
+            .datomize(vec![])
+            .protosize()
+            .textualize(),
+        "Modules.[ { { Spirit core Single.0 } /belief/spirit/core/0.md } ]"
+    );
+    assert_eq!(
+        Output::ModulesVerbose(vec![span]).datomize(vec![]).protosize().textualize(),
+        "ModulesVerbose.[ { { { Vision topic Span.{ 0 1 } } /belief/vision/topic/0-1.md } «A span.» } ]"
     );
 }

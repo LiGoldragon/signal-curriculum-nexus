@@ -2,15 +2,36 @@
 //! yields the output at the input's position or a refusal, any Output.
 
 use signal_curriculum_nexus::{
-    Answerable, Answering, Input, ModuleIdentity, Output, ResolvedModule, RoleComposition,
-    RoleName, RoleSelection, StartupComposition, StartupSelection, Surface,
+    Answerable, Answering, Input, ModuleIdentity, ModuleKind, ModuleSubject, Output,
+    ResolvedModule, RoleComposition, RoleName, RoleSelection, StartupComposition, StartupSelection,
+    Surface, Version, Versions,
 };
 
 /// Answers every module identity back, and refuses everything else with the
 /// capability's name.
 struct Echo;
 
+fn identity() -> ModuleIdentity {
+    ModuleIdentity {
+        module_kind: ModuleKind::Spirit,
+        module_subject: ModuleSubject("core".into()),
+        versions: Versions::Single(Version(0)),
+    }
+}
+
 impl Answering for Echo {
+    fn modules(&self) -> Result<Vec<signal_curriculum_nexus::Module>, Output> {
+        Ok(vec![signal_curriculum_nexus::Module {
+            module_identity: identity(),
+            module_file: signal_curriculum_nexus::ModuleFile("/belief/spirit/core/0.md".into()),
+        }])
+    }
+    fn modules_verbose(&self) -> Result<Vec<signal_curriculum_nexus::ModuleDescription>, Output> {
+        Ok(vec![signal_curriculum_nexus::ModuleDescription {
+            module: self.modules()?.pop().unwrap(),
+            description_text: signal_curriculum_nexus::DescriptionText("Core module".into()),
+        }])
+    }
     fn resolve_skills(
         &self,
         module_identity_vector: &Vec<ModuleIdentity>,
@@ -39,7 +60,7 @@ impl Answering for Echo {
 
 #[test]
 fn each_input_is_answered_by_its_own_capability() {
-    let identities = vec![ModuleIdentity("spirit:core:0".into())];
+    let identities = vec![identity()];
     assert_eq!(
         Input::ResolveSkills(identities.clone()).answer(&Echo),
         Output::SkillsResolved(identities.clone())
@@ -47,6 +68,12 @@ fn each_input_is_answered_by_its_own_capability() {
     assert_eq!(
         Input::ResolveSources(identities).answer(&Echo),
         Output::SourcesResolved(Vec::new())
+    );
+    let listed = Echo.modules().unwrap();
+    assert_eq!(Input::Modules.answer(&Echo), Output::Modules(listed));
+    assert_eq!(
+        Input::ModulesVerbose.answer(&Echo),
+        Output::ModulesVerbose(Echo.modules_verbose().unwrap())
     );
 }
 

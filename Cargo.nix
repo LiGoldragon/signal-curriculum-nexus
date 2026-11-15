@@ -908,7 +908,7 @@ rec {
       };
       "signal-curriculum-nexus" = rec {
         crateName = "signal-curriculum-nexus";
-        version = "0.1.0";
+        version = "0.2.0";
         edition = "2024";
         src = lib.cleanSourceWith { filter = sourceFilter;  src = ./.; };
         libName = "signal_curriculum_nexus";

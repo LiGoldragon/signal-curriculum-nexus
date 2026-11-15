@@ -4,15 +4,25 @@
 use signal_curriculum_nexus::{
     BodySha256, CallerMetaflow, ContextPayloadSha256, ContextProvenance, ContextText,
     DeclaredPlacement, DescriptionPayloadSha256, DescriptionText, Effort, FlowId, Input, ModelId,
-    ModuleIdentity, ModuleSubject, ModuleType, Output, Permission, RecordsPayloadSha256,
-    RecordsText, RenderedSha256, RepositoryName, ResolvedModule, RoleCallers, RoleComposition,
-    RoleName, RoleSelection, RoleTools, SourceRelativePath, SourceRevision, SourceRoot,
-    SourceSha256, StartupComposition, StartupPlacement, StartupSelection, Surface, SystemModules,
-    SystemPayloadSha256, SystemText, Target, UserModules, UserPayloadSha256, UserText,
+    Module, ModuleDescription, ModuleFile, ModuleIdentity, ModuleKind, ModuleSubject, Output,
+    Permission, RecordsPayloadSha256, RecordsText, RenderedSha256, RepositoryName, ResolvedModule,
+    RoleCallers, RoleComposition, RoleName, RoleSelection, RoleTools, SourceRelativePath,
+    SourceRevision, SourceRoot, SourceSha256, StartupComposition, StartupPlacement,
+    StartupSelection, Surface, SystemModules, SystemPayloadSha256, SystemText, Target, UserModules,
+    UserPayloadSha256, UserText, Version, Versions,
 };
 
 fn identity(text: &str) -> ModuleIdentity {
-    ModuleIdentity(text.into())
+    let mut parts = text.split(':');
+    ModuleIdentity {
+        module_kind: match parts.next().unwrap() {
+            "spirit" => ModuleKind::Spirit,
+            "intent" => ModuleKind::Intent,
+            _ => panic!(),
+        },
+        module_subject: ModuleSubject(parts.next().unwrap().into()),
+        versions: Versions::Single(Version(parts.next().unwrap().parse().unwrap())),
+    }
 }
 
 fn caller() -> CallerMetaflow {
@@ -39,6 +49,8 @@ fn provenance() -> ContextProvenance {
 
 fn inputs() -> Vec<Input> {
     vec![
+        Input::Modules,
+        Input::ModulesVerbose,
         Input::ResolveSkills(vec![identity("spirit:core:0")]),
         Input::ResolveSources(vec![
             identity("intent:design:0"),
@@ -60,6 +72,24 @@ fn inputs() -> Vec<Input> {
 
 fn outputs() -> Vec<Output> {
     vec![
+        Output::Modules(vec![Module {
+            module_identity: identity("spirit:core:0"),
+            module_file: ModuleFile("/belief/spirit/core/0.md".into()),
+        }]),
+        Output::ModulesVerbose(vec![ModuleDescription {
+            module: Module {
+                module_identity: ModuleIdentity {
+                    module_kind: ModuleKind::Vision,
+                    module_subject: ModuleSubject("topic".into()),
+                    versions: Versions::Span(signal_curriculum_nexus::Span_Data {
+                        first: signal_curriculum_nexus::First(Version(0)),
+                        last: signal_curriculum_nexus::Last(Version(1)),
+                    }),
+                },
+                module_file: ModuleFile("/belief/vision/topic/0-1.md".into()),
+            },
+            description_text: DescriptionText("A span.".into()),
+        }]),
         Output::SkillsResolved(vec![identity("spirit:core:0")]),
         Output::SourcesResolved(vec![ResolvedModule {
             module_identity: identity("spirit:core:0"),
@@ -67,8 +97,6 @@ fn outputs() -> Vec<Output> {
             source_revision: SourceRevision("0".repeat(40)),
             source_root: SourceRoot("/belief/psyche-belief".into()),
             source_relative_path: SourceRelativePath("spirit/core/0.md".into()),
-            module_type: ModuleType("spirit".into()),
-            module_subject: ModuleSubject("core".into()),
             declared_placement: DeclaredPlacement("system".into()),
             source_sha256: SourceSha256("a".repeat(64)),
             body_sha256: BodySha256("b".repeat(64)),

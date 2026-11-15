@@ -13,3 +13,9 @@ changes.
 
 Curriculum's own file formats, its module declarations, roles and workspace
 projection, stay in Curriculum and import these types.
+
+## 0.2.0 typed identity wire break
+
+Module identities now cross the wire as `{ Spirit subject Single.0 }` or
+`{ Spirit subject Span.{ 0 1 } }`, with typed registry kinds and versions.
+The 0.1.0 archive frames are historical and are refused by the 0.2.0 reader.
