@@ -65,7 +65,7 @@ fn an_output_is_written_as_its_text() {
             .datomize(vec![])
             .protosize()
             .textualize(),
-        "SkillsResolved.[ { Spirit core Single.0 } ]"
+        "SkillsResolved.[ { Spirit\n                   core\n                   Single.0 } ]"
     );
 }
 
@@ -124,13 +124,13 @@ fn listing_records_preserve_singleton_and_span_identity_and_file() {
             .datomize(vec![])
             .protosize()
             .textualize(),
-        "Modules.[ { { Spirit core Single.0 } /belief/spirit/core/0.md } ]"
+        "Modules.[ { { Spirit\n              core\n              Single.0 }\n            /belief/spirit/core/0.md } ]"
     );
     assert_eq!(
         Output::ModulesVerbose(vec![span])
             .datomize(vec![])
             .protosize()
             .textualize(),
-        "ModulesVerbose.[ { { { Vision topic Span.{ 0 1 } } /belief/vision/topic/0-1.md } «A span.» } ]"
+        "ModulesVerbose.[ { { { Vision\n                   topic\n                   Span.{ 0 1 } }\n                 /belief/vision/topic/0-1.md }\n               «A span.» } ]"
     );
 }
