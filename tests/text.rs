@@ -127,7 +127,10 @@ fn listing_records_preserve_singleton_and_span_identity_and_file() {
         "Modules.[ { { Spirit core Single.0 } /belief/spirit/core/0.md } ]"
     );
     assert_eq!(
-        Output::ModulesVerbose(vec![span]).datomize(vec![]).protosize().textualize(),
+        Output::ModulesVerbose(vec![span])
+            .datomize(vec![])
+            .protosize()
+            .textualize(),
         "ModulesVerbose.[ { { { Vision topic Span.{ 0 1 } } /belief/vision/topic/0-1.md } «A span.» } ]"
     );
 }
