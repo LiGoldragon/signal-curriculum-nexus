@@ -17,6 +17,7 @@ pub enum ModuleKind {
     Role,
     Raw,
     Notion,
+    Panel,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -193,6 +194,10 @@ pub struct ContextProvenance {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct MissingPanels(pub std::vec::Vec<ModuleIdentity>);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct StartupComposition {
     pub system_text: SystemText,
     pub user_text: UserText,
@@ -201,6 +206,7 @@ pub struct StartupComposition {
     pub user_payload_sha256: UserPayloadSha256,
     pub records_payload_sha256: RecordsPayloadSha256,
     pub context_provenance_vector: std::vec::Vec<ContextProvenance>,
+    pub missing_panels: MissingPanels,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -302,6 +308,7 @@ pub struct RoleComposition {
     pub context_provenance_vector: std::vec::Vec<ContextProvenance>,
     pub description_payload_sha256: DescriptionPayloadSha256,
     pub context_payload_sha256: ContextPayloadSha256,
+    pub missing_panels: MissingPanels,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]

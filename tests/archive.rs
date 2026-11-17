@@ -23,6 +23,7 @@ fn identity(text: &str) -> ModuleIdentity {
         "compensation" => ModuleKind::Compensation,
         "role" => ModuleKind::Role,
         "raw" => ModuleKind::Raw,
+        "panel" => ModuleKind::Panel,
         _ => panic!(),
     };
     let module_subject = ModuleSubject(parts.next().unwrap().into());
@@ -121,6 +122,9 @@ fn outputs() -> Vec<Output> {
             string_vector: vec!["intent:design:0".into()],
         }]),
         Output::StartupComposed(StartupComposition {
+            missing_panels: signal_curriculum_nexus::MissingPanels(vec![identity(
+                "panel:missing:0",
+            )]),
             system_text: SystemText("system".into()),
             user_text: UserText("user".into()),
             records_text: RecordsText(String::new()),
@@ -130,6 +134,9 @@ fn outputs() -> Vec<Output> {
             context_provenance_vector: vec![provenance()],
         }),
         Output::RoleComposed(RoleComposition {
+            missing_panels: signal_curriculum_nexus::MissingPanels(vec![identity(
+                "panel:missing:0",
+            )]),
             role_name: RoleName("read-trivial".into()),
             surface: Surface::ClaudeAgent,
             model_id: ModelId("claude-haiku".into()),
