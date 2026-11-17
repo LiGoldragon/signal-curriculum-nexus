@@ -134,3 +134,19 @@ fn listing_records_preserve_singleton_and_span_identity_and_file() {
         "ModulesVerbose.[ { { { Vision\n                       topic\n                       Span.{ 0 1 } }\n                     /belief/vision/topic/0-1.md }\n                   «A span.» } ]"
     );
 }
+
+#[test]
+fn notion_identity_round_trips_text_and_signal() {
+    let input = Potential::<Input>::from("ResolveSources.[ { Notion harness-nexus Single.0 } ]")
+        .actualize(&mut budget())
+        .unwrap();
+    let bytes = rkyv::to_bytes::<rkyv::rancor::Error>(&input).unwrap();
+    assert_eq!(
+        rkyv::from_bytes::<Input, rkyv::rancor::Error>(&bytes).unwrap(),
+        input
+    );
+    match input {
+        Input::ResolveSources(modules) => assert_eq!(modules[0].module_kind, ModuleKind::Notion),
+        other => panic!("unexpected {other:?}"),
+    }
+}

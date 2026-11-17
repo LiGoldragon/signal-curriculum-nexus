@@ -28,7 +28,7 @@ Signal
   StartupComposed.StartupComposition
   RoleComposed.RoleComposition
   Rejected.String ]
-[ ModuleKind.[ Spirit Intent Vision Knowledge Inquiry Compensation Role Raw ]
+[ ModuleKind.[ Spirit Intent Vision Knowledge Inquiry Compensation Role Raw Notion ]
   Version.Integer
   Versions.[ Single.Version Span.{ First.Version Last.Version } ]
   ModuleIdentity.{ ModuleKind ModuleSubject Versions }

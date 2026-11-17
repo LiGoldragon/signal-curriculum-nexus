@@ -19,3 +19,7 @@ projection, stay in Curriculum and import these types.
 Module identities now cross the wire as `{ Spirit subject Single.0 }` or
 `{ Spirit subject Span.{ 0 1 } }`, with typed registry kinds and versions.
 The 0.1.0 archive frames are historical. The 0.2.0 reader and writer use matched contract versions; rkyv enum layout provides no reliable guarantee that a reader rejects every frame from an older contract.
+
+## 0.3.0 notion modules
+
+ModuleKind appends Notion after Raw. Existing kind positions stay unchanged; peers must use this matched contract to exchange the new kind. Notion retains its own identity and source path and is composed with knowledge-side modules.
