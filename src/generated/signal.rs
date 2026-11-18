@@ -194,6 +194,22 @@ pub struct ContextProvenance {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct PanelProvenance {
+    pub module_identity: ModuleIdentity,
+    pub repository_name: RepositoryName,
+    pub source_revision: SourceRevision,
+    pub source_relative_path: SourceRelativePath,
+    pub source_sha256: SourceSha256,
+    pub body_sha256: BodySha256,
+    pub rendered_sha256: RenderedSha256,
+}
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct MergedPanels(pub std::vec::Vec<PanelProvenance>);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct MissingPanels(pub std::vec::Vec<ModuleIdentity>);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -207,6 +223,7 @@ pub struct StartupComposition {
     pub records_payload_sha256: RecordsPayloadSha256,
     pub context_provenance_vector: std::vec::Vec<ContextProvenance>,
     pub missing_panels: MissingPanels,
+    pub merged_panels: MergedPanels,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -309,6 +326,7 @@ pub struct RoleComposition {
     pub description_payload_sha256: DescriptionPayloadSha256,
     pub context_payload_sha256: ContextPayloadSha256,
     pub missing_panels: MissingPanels,
+    pub merged_panels: MergedPanels,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]

@@ -58,8 +58,10 @@ Signal
   RecordsPayloadSha256.String
   StartupSelection.{ CallerMetaflow Target SystemModules UserModules Vector<FlowId> }
   ContextProvenance.{ ModuleIdentity RepositoryName SourceRevision SourceRelativePath SourceSha256 BodySha256 RenderedSha256 StartupPlacement Integer }
+  PanelProvenance.{ ModuleIdentity RepositoryName SourceRevision SourceRelativePath SourceSha256 BodySha256 RenderedSha256 }
+  MergedPanels.Vector<PanelProvenance>
   MissingPanels.Vector<ModuleIdentity>
-  StartupComposition.{ SystemText UserText RecordsText SystemPayloadSha256 UserPayloadSha256 RecordsPayloadSha256 Vector<ContextProvenance> MissingPanels }
+  StartupComposition.{ SystemText UserText RecordsText SystemPayloadSha256 UserPayloadSha256 RecordsPayloadSha256 Vector<ContextProvenance> MissingPanels MergedPanels }
   ResolvedModule.{ ModuleIdentity RepositoryName SourceRevision SourceRoot SourceRelativePath DeclaredPlacement SourceSha256 BodySha256 String Vector<String> }
   RoleName.String
   ModelId.String
@@ -73,4 +75,4 @@ Signal
   RoleTools.[ Inherit Explicit.Vector<String> ]
   RoleCallers.[ Any Only.Vector<CallerMetaflow> ]
   RoleSelection.{ RoleName Surface }
-  RoleComposition.{ RoleName Surface ModelId Effort Permission DescriptionText ContextText RoleTools RoleCallers Vector<ContextProvenance> DescriptionPayloadSha256 ContextPayloadSha256 MissingPanels } ]
+  RoleComposition.{ RoleName Surface ModelId Effort Permission DescriptionText ContextText RoleTools RoleCallers Vector<ContextProvenance> DescriptionPayloadSha256 ContextPayloadSha256 MissingPanels MergedPanels } ]

@@ -122,6 +122,17 @@ fn outputs() -> Vec<Output> {
             string_vector: vec!["intent:design:0".into()],
         }]),
         Output::StartupComposed(StartupComposition {
+            merged_panels: signal_curriculum_nexus::MergedPanels(vec![
+                signal_curriculum_nexus::PanelProvenance {
+                    module_identity: identity("panel:native:0"),
+                    repository_name: RepositoryName("mind-belief".into()),
+                    source_revision: SourceRevision("d".repeat(40)),
+                    source_relative_path: SourceRelativePath("panel/native/0.md".into()),
+                    source_sha256: SourceSha256("e".repeat(64)),
+                    body_sha256: BodySha256("f".repeat(64)),
+                    rendered_sha256: RenderedSha256("a".repeat(64)),
+                },
+            ]),
             missing_panels: signal_curriculum_nexus::MissingPanels(vec![identity(
                 "panel:missing:0",
             )]),
@@ -134,6 +145,17 @@ fn outputs() -> Vec<Output> {
             context_provenance_vector: vec![provenance()],
         }),
         Output::RoleComposed(RoleComposition {
+            merged_panels: signal_curriculum_nexus::MergedPanels(vec![
+                signal_curriculum_nexus::PanelProvenance {
+                    module_identity: identity("panel:native:0"),
+                    repository_name: RepositoryName("mind-belief".into()),
+                    source_revision: SourceRevision("d".repeat(40)),
+                    source_relative_path: SourceRelativePath("panel/native/0.md".into()),
+                    source_sha256: SourceSha256("e".repeat(64)),
+                    body_sha256: BodySha256("f".repeat(64)),
+                    rendered_sha256: RenderedSha256("a".repeat(64)),
+                },
+            ]),
             missing_panels: signal_curriculum_nexus::MissingPanels(vec![identity(
                 "panel:missing:0",
             )]),
