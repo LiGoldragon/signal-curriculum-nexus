@@ -23,6 +23,7 @@ fn identity(text: &str) -> ModuleIdentity {
         "compensation" => ModuleKind::Compensation,
         "role" => ModuleKind::Role,
         "raw" => ModuleKind::Raw,
+        "state" => ModuleKind::State,
         _ => panic!(),
     };
     let module_subject = ModuleSubject(parts.next().unwrap().into());
@@ -72,6 +73,7 @@ fn inputs() -> Vec<Input> {
             identity("intent:design:0"),
             identity("vision:ethos:0"),
             identity("vision:topic:0-1"),
+            identity("state:hosts:0"),
         ]),
         Input::ComposeStartup(StartupSelection {
             caller_metaflow: caller(),

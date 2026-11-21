@@ -59,6 +59,21 @@ fn an_input_is_read_from_its_text() {
 }
 
 #[test]
+fn state_can_be_requested_as_an_on_demand_source() {
+    let input = Potential::<Input>::from("ResolveSources.[ { State hosts Single.0 } ]")
+        .actualize(&mut budget())
+        .expect("a State source request");
+    assert_eq!(
+        input,
+        Input::ResolveSources(vec![ModuleIdentity {
+            module_kind: ModuleKind::State,
+            module_subject: ModuleSubject("hosts".into()),
+            versions: Versions::Single(Version(0)),
+        }])
+    );
+}
+
+#[test]
 fn an_output_is_written_as_its_text() {
     assert_eq!(
         Output::SkillsResolved(vec![identity()])

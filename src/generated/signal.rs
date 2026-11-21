@@ -17,6 +17,7 @@ pub enum ModuleKind {
     Role,
     Raw,
     Notion,
+    State,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
