@@ -15,12 +15,12 @@
 ; role's description and context for its surface.
 Signal
 []
-[ ResolveSkills.Vector<ModuleIdentity>
-  ResolveSources.Vector<ModuleIdentity>
+[ ResolveSkills.⟦ ModuleIdentity ⟧
+  ResolveSources.⟦ ModuleIdentity ⟧
   ComposeStartup.StartupSelection
   ComposeRole.RoleSelection ]
-[ SkillsResolved.Vector<ModuleIdentity>
-  SourcesResolved.Vector<ResolvedModule>
+[ SkillsResolved.⟦ ModuleIdentity ⟧
+  SourcesResolved.⟦ ResolvedModule ⟧
   StartupComposed.StartupComposition
   RoleComposed.RoleComposition
   Rejected.String ]
@@ -38,8 +38,8 @@ Signal
   Target.[ Claude Codex Pi OpenCode ]
   CallerMetaflow.{ String String String }
   StartupPlacement.[ System User ]
-  SystemModules.Vector<ModuleIdentity>
-  UserModules.Vector<ModuleIdentity>
+  SystemModules.⟦ ModuleIdentity ⟧
+  UserModules.⟦ ModuleIdentity ⟧
   FlowId.String
   SystemText.String
   UserText.String
@@ -47,10 +47,10 @@ Signal
   SystemPayloadSha256.String
   UserPayloadSha256.String
   RecordsPayloadSha256.String
-  StartupSelection.{ CallerMetaflow Target SystemModules UserModules Vector<FlowId> }
+  StartupSelection.{ CallerMetaflow Target SystemModules UserModules ⟦ FlowId ⟧ }
   ContextProvenance.{ ModuleIdentity RepositoryName SourceRevision SourceRelativePath SourceSha256 BodySha256 RenderedSha256 StartupPlacement Integer }
-  StartupComposition.{ SystemText UserText RecordsText SystemPayloadSha256 UserPayloadSha256 RecordsPayloadSha256 Vector<ContextProvenance> }
-  ResolvedModule.{ ModuleIdentity RepositoryName SourceRevision SourceRoot SourceRelativePath ModuleType ModuleSubject DeclaredPlacement SourceSha256 BodySha256 String Vector<String> }
+  StartupComposition.{ SystemText UserText RecordsText SystemPayloadSha256 UserPayloadSha256 RecordsPayloadSha256 ⟦ ContextProvenance ⟧ }
+  ResolvedModule.{ ModuleIdentity RepositoryName SourceRevision SourceRoot SourceRelativePath ModuleType ModuleSubject DeclaredPlacement SourceSha256 BodySha256 String ⟦ String ⟧ }
   RoleName.String
   ModelId.String
   DescriptionText.String
@@ -60,7 +60,7 @@ Signal
   Permission.[ Restricted Unrestricted ]
   Effort.[ Low Medium High Xhigh ]
   Surface.[ ClaudeAgent CodexAgent PiAgent ]
-  RoleTools.[ Inherit Explicit.Vector<String> ]
-  RoleCallers.[ Any Only.Vector<CallerMetaflow> ]
+  RoleTools.[ Inherit Explicit.⟦ String ⟧ ]
+  RoleCallers.[ Any Only.⟦ CallerMetaflow ⟧ ]
   RoleSelection.{ RoleName Surface }
-  RoleComposition.{ RoleName Surface ModelId Effort Permission DescriptionText ContextText RoleTools RoleCallers Vector<ContextProvenance> DescriptionPayloadSha256 ContextPayloadSha256 } ]
+  RoleComposition.{ RoleName Surface ModelId Effort Permission DescriptionText ContextText RoleTools RoleCallers ⟦ ContextProvenance ⟧ DescriptionPayloadSha256 ContextPayloadSha256 } ]

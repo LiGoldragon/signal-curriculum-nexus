@@ -2,52 +2,55 @@
     dead_code,
     non_camel_case_types,
     non_snake_case,
+    unused_extern_crates,
     clippy::type_complexity
 )]
 #[rustfmt::skip]
-#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ModuleIdentity(pub String);
+extern crate alloc;
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct RepositoryName(pub String);
+pub struct ModuleIdentity(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SourceRevision(pub String);
+pub struct RepositoryName(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SourceRoot(pub String);
+pub struct SourceRevision(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SourceRelativePath(pub String);
+pub struct SourceRoot(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ModuleType(pub String);
+pub struct SourceRelativePath(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ModuleSubject(pub String);
+pub struct ModuleType(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct DeclaredPlacement(pub String);
+pub struct ModuleSubject(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SourceSha256(pub String);
+pub struct DeclaredPlacement(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct BodySha256(pub String);
+pub struct SourceSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct RenderedSha256(pub String);
+pub struct BodySha256(pub alloc::string::String);
+#[rustfmt::skip]
+#[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
+pub struct RenderedSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
@@ -61,9 +64,9 @@ pub enum Target {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub struct CallerMetaflow {
-    pub first_string: String,
-    pub second_string: String,
-    pub third_string: String,
+    pub first_string: alloc::string::String,
+    pub second_string: alloc::string::String,
+    pub third_string: alloc::string::String,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -75,39 +78,39 @@ pub enum StartupPlacement {
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SystemModules(pub std::vec::Vec<ModuleIdentity>);
+pub struct SystemModules(pub alloc::vec::Vec<ModuleIdentity>);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct UserModules(pub std::vec::Vec<ModuleIdentity>);
+pub struct UserModules(pub alloc::vec::Vec<ModuleIdentity>);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct FlowId(pub String);
+pub struct FlowId(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SystemText(pub String);
+pub struct SystemText(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct UserText(pub String);
+pub struct UserText(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct RecordsText(pub String);
+pub struct RecordsText(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct SystemPayloadSha256(pub String);
+pub struct SystemPayloadSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct UserPayloadSha256(pub String);
+pub struct UserPayloadSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct RecordsPayloadSha256(pub String);
+pub struct RecordsPayloadSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
@@ -116,7 +119,7 @@ pub struct StartupSelection {
     pub target: Target,
     pub system_modules: SystemModules,
     pub user_modules: UserModules,
-    pub flow_id_vector: std::vec::Vec<FlowId>,
+    pub flow_id_vector: alloc::vec::Vec<FlowId>,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -142,7 +145,7 @@ pub struct StartupComposition {
     pub system_payload_sha256: SystemPayloadSha256,
     pub user_payload_sha256: UserPayloadSha256,
     pub records_payload_sha256: RecordsPayloadSha256,
-    pub context_provenance_vector: std::vec::Vec<ContextProvenance>,
+    pub context_provenance_vector: alloc::vec::Vec<ContextProvenance>,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -158,33 +161,33 @@ pub struct ResolvedModule {
     pub declared_placement: DeclaredPlacement,
     pub source_sha256: SourceSha256,
     pub body_sha256: BodySha256,
-    pub string: String,
-    pub string_vector: std::vec::Vec<String>,
+    pub string: alloc::string::String,
+    pub string_vector: alloc::vec::Vec<alloc::string::String>,
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct RoleName(pub String);
+pub struct RoleName(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ModelId(pub String);
+pub struct ModelId(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct DescriptionText(pub String);
+pub struct DescriptionText(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ContextText(pub String);
+pub struct ContextText(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct DescriptionPayloadSha256(pub String);
+pub struct DescriptionPayloadSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
-pub struct ContextPayloadSha256(pub String);
+pub struct ContextPayloadSha256(pub alloc::string::String);
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
@@ -214,14 +217,14 @@ pub enum Surface {
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum RoleTools {
     Inherit,
-    Explicit(std::vec::Vec<String>),
+    Explicit(alloc::vec::Vec<alloc::string::String>),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum RoleCallers {
     Any,
-    Only(std::vec::Vec<CallerMetaflow>),
+    Only(alloc::vec::Vec<CallerMetaflow>),
 }
 #[rustfmt::skip]
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
@@ -243,7 +246,7 @@ pub struct RoleComposition {
     pub context_text: ContextText,
     pub role_tools: RoleTools,
     pub role_callers: RoleCallers,
-    pub context_provenance_vector: std::vec::Vec<ContextProvenance>,
+    pub context_provenance_vector: alloc::vec::Vec<ContextProvenance>,
     pub description_payload_sha256: DescriptionPayloadSha256,
     pub context_payload_sha256: ContextPayloadSha256,
 }
@@ -251,8 +254,8 @@ pub struct RoleComposition {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Input {
-    ResolveSkills(std::vec::Vec<ModuleIdentity>),
-    ResolveSources(std::vec::Vec<ModuleIdentity>),
+    ResolveSkills(alloc::vec::Vec<ModuleIdentity>),
+    ResolveSources(alloc::vec::Vec<ModuleIdentity>),
     ComposeStartup(StartupSelection),
     ComposeRole(RoleSelection),
 }
@@ -260,38 +263,40 @@ pub enum Input {
 #[derive(rkyv::Archive, rkyv::Serialize, rkyv::Deserialize, Clone, Debug, PartialEq, Eq, Hash)]
 #[cfg_attr(feature = "datom", derive(datom_codec::Datomizable, datom_codec::Composing))]
 pub enum Output {
-    SkillsResolved(std::vec::Vec<ModuleIdentity>),
-    SourcesResolved(std::vec::Vec<ResolvedModule>),
+    SkillsResolved(alloc::vec::Vec<ModuleIdentity>),
+    SourcesResolved(alloc::vec::Vec<ResolvedModule>),
     StartupComposed(StartupComposition),
     RoleComposed(RoleComposition),
-    Rejected(String),
+    Rejected(alloc::string::String),
 }
 #[rustfmt::skip]
 #[allow(clippy::result_large_err, clippy::ptr_arg, clippy::borrowed_box)]
 pub trait Answering {
     fn resolve_skills(
         &self,
-        module_identity_vector: &std::vec::Vec<ModuleIdentity>,
-    ) -> std::result::Result<std::vec::Vec<ModuleIdentity>, Output>;
+        module_identity_vector: &alloc::vec::Vec<ModuleIdentity>,
+    ) -> core::result::Result<alloc::vec::Vec<ModuleIdentity>, Output>;
     fn resolve_sources(
         &self,
-        module_identity_vector: &std::vec::Vec<ModuleIdentity>,
-    ) -> std::result::Result<std::vec::Vec<ResolvedModule>, Output>;
+        module_identity_vector: &alloc::vec::Vec<ModuleIdentity>,
+    ) -> core::result::Result<alloc::vec::Vec<ResolvedModule>, Output>;
     fn compose_startup(
         &self,
         startup_selection: &StartupSelection,
-    ) -> std::result::Result<StartupComposition, Output>;
+    ) -> core::result::Result<StartupComposition, Output>;
     fn compose_role(
         &self,
         role_selection: &RoleSelection,
-    ) -> std::result::Result<RoleComposition, Output>;
+    ) -> core::result::Result<RoleComposition, Output>;
 }
 #[rustfmt::skip]
 pub trait Answerable {
-    fn answer<Nexus: Answering>(&self, nexus: &Nexus) -> Output;
+    type Answer;
+    fn answer<Nexus: Answering>(&self, nexus: &Nexus) -> Self::Answer;
 }
 #[rustfmt::skip]
 impl Answerable for Input {
+    type Answer = Output;
     fn answer<Nexus: Answering>(&self, nexus: &Nexus) -> Output {
         match self {
             Input::ResolveSkills(carried) => {
